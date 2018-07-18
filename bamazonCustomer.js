@@ -110,3 +110,17 @@ function fulfil(id, quant) {
         }
     });
 }
+
+function again() {
+    inquirer
+        .prompt([
+            {
+                name: "id",
+                type: "input",
+                message: "What is the ID of the product you would like to buy?"
+            }
+        ])
+        .then(function (answer) {
+          console.log(answer.id);
+        });
+};
