@@ -84,29 +84,29 @@ function askQ() {
                 if (err) throw err;
                 if (res[0].stock_quantity < parseInt(answer.units)) {
                     console.log("Sorry we have an insufficient quantity of " + res[0].product_name + " to process your order.")
-                    connection.end();
+                    again();
                 }
                 else {
                     console.log("\nProcessing order");
                     console.log("****************");
                     newQuant = (res[0].stock_quantity - parseInt(answer.units));
-                    fulfil(answer.id, newQuant);
                     console.log("You purchased " + answer.units + " units of " + res[0].product_name + ".");
                     var cost = (parseInt(answer.units) * res[0].price);
                     console.log("Your total cost was: $" + cost.toFixed(2));
-                    connection.end();
+                    fulfil(answer.id, newQuant);
                 }
             });
         });
 };
 
-function fulfil(id, quant) {
+var fulfil = function (id, quant) {
     var query = "UPDATE products SET stock_quantity=" + quant + " WHERE item_id=" + id;
     connection.query(query, function (err) {
         if (err) throw err;
         else {
             console.log("__________________________");
             console.log("Remaining quantity updated");
+            again();
         }
     });
 }
@@ -115,12 +115,18 @@ function again() {
     inquirer
         .prompt([
             {
-                name: "id",
-                type: "input",
-                message: "What is the ID of the product you would like to buy?"
+                type: "confirm",
+                message: "Do you want to continue shopping?:",
+                name: "confirm",
+                default: true
             }
         ])
         .then(function (answer) {
-          console.log(answer.id);
+            if (answer.confirm) {
+                dispInv();
+            }
+            else {
+                connection.end();
+            }
         });
 };
