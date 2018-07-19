@@ -23,7 +23,7 @@ function dispInv() {
     var query = "SELECT * FROM products";
     connection.query(query, function (err, res) {
         console.log("\n---------------------------------------------")
-        console.log("| ID     | Name                    | Price  |        ")
+        console.log("| ID     | Name                    | Price  |")
         console.log("---------------------------------------------")
         for (var i = 0; i < res.length; i++) {
             console.log(
