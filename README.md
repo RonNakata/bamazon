@@ -26,5 +26,5 @@ Select view low inventory, and it will display items with quantity less than 5 !
 
 Select add to inventory, and it will propmt you to enter the id of an item and the quantity you want to add ![8](img/8_before.png) ![8](img/8.png) ![8](img/8_after.png)
 
-Select Add new product, and it will prompt you for the necessary data to add a new product, then add it ![9](img/9_before.png)
+Select Add new product, and it will prompt you for the necessary data to add a new product, then add it ![9](img/9.png)
 
